@@ -1,207 +1,214 @@
 import { useState } from "react";
 import JsonEditor from "./components/JsonEditor/jsonEditor";
 import {
-  EditableFielsdObjectType,
-  NonEditableFieldsObjectType,
-  onChangePropsType,
-  OnSubmitPropsType,
+	EditableFielsdObjectType,
+	NonEditableFieldsObjectType,
+	onChangePropsType,
+	OnSubmitPropsType,
 } from "./types/JsonEditor.types";
 import { indianStatesOptions } from "./temp";
 import { Button } from "./components/ui/button";
 import { GLOBAL_EDITING_MODE } from "./constants/constants";
 
 function App() {
-  const [isEditing, setIsEditing] = useState<boolean>(false);
-  const [isExpanded, setIsExpanded] = useState<boolean>(false);
+	const [isEditing, setIsEditing] = useState<boolean>(false);
+	const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
-  const x: Record<string, any> = {
-    name: "Himalaya",
-    surname: true,
-    age : 23,
-    testNumberField: 2292,
-    testNullField: null,
-    dob: "03/12/2000",
-    about: "Hello, I am a software developer",
-    address: {
-      city: "Bareilly",
-      state: "Uttar Pradesh",
-      key: {
-        _id: "66c3ab28dc5e92c6ea662626",
-        name: "Allen Beck",
-        gender: "male",
-        company: "HAWKSTER",
-        email: "allenbeck@hawkster.com",
-        phone: 283839389,
-        secondKey: {
-          _id: "66c3ab28dc5e92c6ea662626",
-          name: "Allen Beck",
-          gender: "female",
-          company: "HAWKSTER",
-          email: "allenbeck@hawkster.com",
-          phone: "+1 (866) 599-3761",
-        },
-      },
-    },
-    sampleData: [
-      {
-        _id: "66c3ab28dc5e92c6ea662626",
-        name: "Allen Beck",
-        gender: "male",
-        company: "HAWKSTER",
-        email: "allenbeck@hawkster.com",
-        phone: "+1 (866) 599-3761",
-        secondKey: {
-          _id: "66c3ab28dc5e92c6ea662626",
-          name: "Allen Beck",
-          gender: "male",
-          company: "HAWKSTER",
-          email: "allenbeck@hawkster.com",
-          phone: "+1 (866) 599-3761",
-          thirdKey: {
-            _id: "66c3ab28dc5e92c6ea662626",
-            name: "Allen Beck",
-            gender: "male",
-            company: "HAWKSTER",
-            email: "allenbeck@hawkster.com",
-            phone: "+1 (866) 599-3761",
-          },
-        },
-      },
-      {
-        _id: "66c3ab28cdadb9ffd1e92675",
-        name: "Walters Mullen",
-        gender: "male",
-        company: "BOILICON",
-        email: "waltersmullen@boilicon.com",
-        phone: "+1 (911) 573-2834",
-      },
-    ],
-    hobbies: ["Movies", "Music"],
-  };
+	const x: Record<string, any> = {
+		name: "Himalaya",
+		profilePicture: {
+			type: "file",
+			format: "image/png",
+			filename: "profile.png",
+			base64:
+				"iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYPhfDwAChwGA60e6kgAAAAASUVORK5CYII",
+		},
+		surname: true,
+		age: 23,
+		testNumberField: 2292,
+		testNullField: null,
+		dob: "03/12/2000",
+		about: "Hello, I am a software developer",
+		address: {
+			city: "Bareilly",
+			state: "Uttar Pradesh",
+			key: {
+				_id: "66c3ab28dc5e92c6ea662626",
+				name: "Allen Beck",
+				gender: "male",
+				company: "HAWKSTER",
+				email: "allenbeck@hawkster.com",
+				phone: 283839389,
+				secondKey: {
+					_id: "66c3ab28dc5e92c6ea662626",
+					name: "Allen Beck",
+					gender: "female",
+					company: "HAWKSTER",
+					email: "allenbeck@hawkster.com",
+					phone: "+1 (866) 599-3761",
+				},
+			},
+		},
+		sampleData: [
+			{
+				_id: "66c3ab28dc5e92c6ea662626",
+				name: "Allen Beck",
+				gender: "male",
+				company: "HAWKSTER",
+				email: "allenbeck@hawkster.com",
+				phone: "+1 (866) 599-3761",
+				secondKey: {
+					_id: "66c3ab28dc5e92c6ea662626",
+					name: "Allen Beck",
+					gender: "male",
+					company: "HAWKSTER",
+					email: "allenbeck@hawkster.com",
+					phone: "+1 (866) 599-3761",
+					thirdKey: {
+						_id: "66c3ab28dc5e92c6ea662626",
+						name: "Allen Beck",
+						gender: "male",
+						company: "HAWKSTER",
+						email: "allenbeck@hawkster.com",
+						phone: "+1 (866) 599-3761",
+					},
+				},
+			},
+			{
+				_id: "66c3ab28cdadb9ffd1e92675",
+				name: "Walters Mullen",
+				gender: "male",
+				company: "BOILICON",
+				email: "waltersmullen@boilicon.com",
+				phone: "+1 (911) 573-2834",
+			},
+		],
+		hobbies: ["Movies", "Music"],
+	};
 
-  const editbaleFieldsObject: EditableFielsdObjectType = {
-    dob: {
-      type: "date",
-      format: "DD/MM/YYYY",
-    },
-    age : {
-      type : "number",
-      validations : {
-        minValue:1,
-        maxValue: 50,
-      }
-    },
-    about: {
-      type: "textArea",
-      validations : {
-        minLength : 1,
-      }
-    },
-    "address.state": {
-      type: "select",
-      options: indianStatesOptions,
-    },
-    "address.key.phone": {
-      type: "number"
-    },
-    "sampleData.[].email": {
-      type: "string",
-      validations: {
-        regex: /^[^@]+@[^@]+\.[^@]+$/,
-        regexValidationMessage: "Please enter a valid email address.",
-      },
-    },
-    "address.key.gender": {
-      type: "radio",
-      options: [
-        { key: "male", value: "male" },
-        { key: "female", value: "female" },
-        { key: "others", value: "others" },
-      ],
-    },
-    "address.key.secondKey.gender": {
-      type: "radio",
-      options: [
-        { key: "male", value: "male" },
-        { key: "female", value: "female" },
-        { key: "others", value: "others" },
-      ],
-    },
-    "sampleData.[].secondKey.gender": {
-      type: "radio",
-      options: [
-        { key: "male", value: "male" },
-        { key: "female", value: "female" },
-        { key: "other", value: "other" },
-      ],
-    },
-    "sampleData.[].gender" : {
-      type : "radio",
-      options: [
-        { key: "male", value: "male" },
-        { key: "female", value: "female" },
-        { key: "other", value: "other" },
-      ],
-    },
-    "sampleData.[].name" : {
-      type : "textArea",
-      validations : {
-        maxLength : 12
-      }
-    },
-    "hobbies.[]" : {
-      type: "string",
-      validations: {
-        maxLength : 20
-      }
-    },
-    "hobbies.1" : {
-      type : "textArea",
-    }
-  };
+	const editbaleFieldsObject: EditableFielsdObjectType = {
+		dob: {
+			type: "date",
+			format: "DD/MM/YYYY",
+		},
+		age: {
+			type: "number",
+			validations: {
+				minValue: 1,
+				maxValue: 50,
+			},
+		},
+		about: {
+			type: "textArea",
+			validations: {
+				minLength: 1,
+			},
+		},
+		"address.state": {
+			type: "select",
+			options: indianStatesOptions,
+		},
+		"address.key.phone": {
+			type: "number",
+		},
+		"sampleData.[].email": {
+			type: "string",
+			validations: {
+				regex: /^[^@]+@[^@]+\.[^@]+$/,
+				regexValidationMessage: "Please enter a valid email address.",
+			},
+		},
+		"address.key.gender": {
+			type: "radio",
+			options: [
+				{ key: "male", value: "male" },
+				{ key: "female", value: "female" },
+				{ key: "others", value: "others" },
+			],
+		},
+		"address.key.secondKey.gender": {
+			type: "radio",
+			options: [
+				{ key: "male", value: "male" },
+				{ key: "female", value: "female" },
+				{ key: "others", value: "others" },
+			],
+		},
+		"sampleData.[].secondKey.gender": {
+			type: "radio",
+			options: [
+				{ key: "male", value: "male" },
+				{ key: "female", value: "female" },
+				{ key: "other", value: "other" },
+			],
+		},
+		"sampleData.[].gender": {
+			type: "radio",
+			options: [
+				{ key: "male", value: "male" },
+				{ key: "female", value: "female" },
+				{ key: "other", value: "other" },
+			],
+		},
+		"sampleData.[].name": {
+			type: "textArea",
+			validations: {
+				maxLength: 12,
+			},
+		},
+		"hobbies.[]": {
+			type: "string",
+			validations: {
+				maxLength: 20,
+			},
+		},
+		"hobbies.1": {
+			type: "textArea",
+		},
+	};
 
-  const nonEditbaleFieldObject: NonEditableFieldsObjectType = {};
+	const nonEditbaleFieldObject: NonEditableFieldsObjectType = {};
 
-  const onSubmit = (props : OnSubmitPropsType) => {
-    console.info(props)
-    if (props.submitType === GLOBAL_EDITING_MODE){
-      setIsEditing(false)
-    }
-  }
+	const onSubmit = (props: OnSubmitPropsType) => {
+		console.info(props);
+		if (props.submitType === GLOBAL_EDITING_MODE) {
+			setIsEditing(false);
+		}
+	};
 
-  const onChange = (props : onChangePropsType) => {
-    console.info(props)
-  }
+	const onChange = (props: onChangePropsType) => {
+		console.info(props);
+	};
 
-  return (
-    <div className="p-4">
-      <h1 className="text-xl mb-5">Json Editor</h1>
-      <div className="flex items-center mb-4">
-        <Button onClick={() => setIsEditing(!isEditing)}>
-          {isEditing ? "Read Mode" : "Edit Mode"}
-        </Button>
-        <Button className="ml-2" onClick={() => setIsExpanded(!isExpanded)}>
-          {isExpanded ? "Collapse" : "Expand"}
-        </Button>
-      </div>
-      <JsonEditor
-        json={x}
-        isExpanded={isExpanded}
-        onSubmit={onSubmit}
-        onChange={onChange}
-        editingConfig={{
-          editingMode : 'inline',
-          editableFields : editbaleFieldsObject,
-          nonEditableFields: nonEditbaleFieldObject,
-        }}
-        globalSubmitButtonConfigs={{
-          variant : "secondary",
-          buttonText : "Submit JSON",
-          className : "rounded",
-        }}
-      />
-    </div>
-  );
+	return (
+		<div className="p-4">
+			<h1 className="text-xl mb-5">Json Editor</h1>
+			<div className="flex items-center mb-4">
+				<Button onClick={() => setIsEditing(!isEditing)}>
+					{isEditing ? "Read Mode" : "Edit Mode"}
+				</Button>
+				<Button className="ml-2" onClick={() => setIsExpanded(!isExpanded)}>
+					{isExpanded ? "Collapse" : "Expand"}
+				</Button>
+			</div>
+			<JsonEditor
+				json={x}
+				isExpanded={isExpanded}
+				onSubmit={onSubmit}
+				onChange={onChange}
+				editingConfig={{
+					editingMode: "inline",
+					editableFields: editbaleFieldsObject,
+					nonEditableFields: nonEditbaleFieldObject,
+				}}
+				globalSubmitButtonConfigs={{
+					variant: "secondary",
+					buttonText: "Submit JSON",
+					className: "rounded",
+				}}
+			/>
+		</div>
+	);
 }
 
 export default App;

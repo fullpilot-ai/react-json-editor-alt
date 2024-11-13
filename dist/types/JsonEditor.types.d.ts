@@ -71,7 +71,7 @@ export type DiffKeyValues = {
         updated: string;
     };
 };
-type EditorMode = 'global' | 'individual' | 'global-individual' | 'inline';
+type EditorMode = "global" | "individual" | "global-individual" | "inline";
 export type onChangePropsType = {
     initialJson: Record<string, any>;
     updatedJson: Record<string, any>;
@@ -80,8 +80,8 @@ export type onChangePropsType = {
     validations: Record<string, any>;
 };
 export type OnSubmitPropsType = {
-    submitType: Exclude<EditorMode, 'global-individual'>;
-} & Omit<onChangePropsType, 'validations'>;
+    submitType: Exclude<EditorMode, "global-individual">;
+} & Omit<onChangePropsType, "validations">;
 export type JsonEditorContextType = {
     jsonState: Record<string, any> | null;
     editJsonState: Record<string, any> | null;
@@ -121,7 +121,7 @@ type StandardEditingConfig = {
 };
 export type EditingConfig = StandardEditingConfig | InlineEditingConfig;
 export type GlobalSubmitButtonConfigs = {
-    variant?: "secondary" | "outline" | 'ghost' | "link" | 'destructive';
+    variant?: "secondary" | "outline" | "ghost" | "link" | "destructive";
     className?: string;
     buttonText?: string;
     children?: React.ReactNode;
@@ -184,12 +184,12 @@ export type DefaultSelectElementProps = {
     }>;
 } & DefaultInputField;
 export type DefaultTextElementProps = {} & DefaultInputField;
-export type DefaultNumberElementProps = Omit<DefaultInputField, 'value' | 'readModeValue'> & {
+export type DefaultNumberElementProps = Omit<DefaultInputField, "value" | "readModeValue"> & {
     value: number;
     readModeValue?: number;
 };
 export type DefaultTextAreaElementProps = {} & DefaultInputField;
-export type DefaultBooleanElementProps = Omit<DefaultInputField, 'value' | 'readModeValue'> & {
+export type DefaultBooleanElementProps = Omit<DefaultInputField, "value" | "readModeValue"> & {
     value: boolean;
     readModeValue?: boolean;
 };
@@ -204,4 +204,20 @@ export type DefaultDateElementProps<F extends DateFormat = "DD/MM/YYYY"> = {
     minDate?: F extends "DD/MM/YYYY" | "YYYY/MM/DD" | "MM/DD/YYYY" ? `${number}/${number}/${number}` : F extends "DD-MM-YYYY" | "YYYY-MM-DD" | "MM-DD-YYYY" ? `${number}-${number}-${number}` : never;
     maxDate?: F extends "DD/MM/YYYY" | "YYYY/MM/DD" | "MM/DD/YYYY" ? `${number}/${number}/${number}` : F extends "DD-MM-YYYY" | "YYYY-MM-DD" | "MM-DD-YYYY" ? `${number}-${number}-${number}` : never;
 } & DefaultInputField;
+export interface DefaultFileElementProps {
+    value: {
+        type: string;
+        format: string | null;
+        filename: string | null;
+        base64: string | null;
+    } | null;
+    readModeValue: {
+        type: string;
+        format: string | null;
+        filename: string | null;
+        base64: string | null;
+    } | null;
+    path: string;
+    format?: string;
+}
 export {};
