@@ -85,7 +85,9 @@ function DefaultFileInput({
 		}
 	};
 
-	const disabled = JSON.stringify(readModeValue) === JSON.stringify(fileValue);
+	const disabled =
+		readModeValue?.base64 === fileValue?.base64 &&
+		readModeValue?.filename === fileValue?.filename;
 	const isEditing = selectedFieldsForEditing[path];
 
 	return (
