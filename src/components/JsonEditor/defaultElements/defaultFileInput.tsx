@@ -93,7 +93,7 @@ function DefaultFileInput({
 			{isEditing ? (
 				<div className="flex items-center gap-2">
 					<div className="inline-flex h-9 items-center justify-center rounded-md bg-white text-sm font-medium">
-						<label className="relative px-3 py-1.5 h-full flex items-center bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer rounded-l-md border-r">
+						<label className="relative px-2 py-1.5 h-full flex items-center bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer rounded-l-md border-r text-xs whitespace-nowrap">
 							Choose File
 							<input
 								ref={fileInputRef}
@@ -102,8 +102,8 @@ function DefaultFileInput({
 								className="hidden"
 							/>
 						</label>
-						<span className="px-3 text-sm text-slate-600 border rounded-r-md border-l-0 h-full flex items-center">
-							<span className="truncate max-w-[200px]">
+						<span className="px-2 text-sm text-slate-600 border rounded-r-md border-l-0 h-full flex items-center">
+							<span className="truncate max-w-[150px]">
 								{fileName || "No file chosen"}
 							</span>
 							{fileName && (

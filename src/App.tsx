@@ -181,7 +181,7 @@ function App() {
 	};
 
 	return (
-		<div className="p-4">
+		<div className="w-[500px] overflow-x-hidden bg-green-300">
 			<h1 className="text-xl mb-5">Json Editor</h1>
 			<div className="flex items-center mb-4">
 				<Button onClick={() => setIsEditing(!isEditing)}>

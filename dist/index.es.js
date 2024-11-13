@@ -3380,7 +3380,7 @@ function iu({
   }, y = JSON.stringify(t) === JSON.stringify(r), w = h[n];
   return /* @__PURE__ */ u.jsx(u.Fragment, { children: w ? /* @__PURE__ */ u.jsxs("div", { className: "flex items-center gap-2", children: [
     /* @__PURE__ */ u.jsxs("div", { className: "inline-flex h-9 items-center justify-center rounded-md bg-white text-sm font-medium", children: [
-      /* @__PURE__ */ u.jsxs("label", { className: "relative px-3 py-1.5 h-full flex items-center bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer rounded-l-md border-r", children: [
+      /* @__PURE__ */ u.jsxs("label", { className: "relative px-2 py-1.5 h-full flex items-center bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer rounded-l-md border-r text-xs whitespace-nowrap", children: [
         "Choose File",
         /* @__PURE__ */ u.jsx(
           "input",
@@ -3392,8 +3392,8 @@ function iu({
           }
         )
       ] }),
-      /* @__PURE__ */ u.jsxs("span", { className: "px-3 text-sm text-slate-600 border rounded-r-md border-l-0 h-full flex items-center", children: [
-        /* @__PURE__ */ u.jsx("span", { className: "truncate max-w-[200px]", children: a || "No file chosen" }),
+      /* @__PURE__ */ u.jsxs("span", { className: "px-2 text-sm text-slate-600 border rounded-r-md border-l-0 h-full flex items-center", children: [
+        /* @__PURE__ */ u.jsx("span", { className: "truncate max-w-[150px]", children: a || "No file chosen" }),
         a && /* @__PURE__ */ u.jsx(
           "button",
           {
@@ -3442,7 +3442,7 @@ function cu({
   return /* @__PURE__ */ u.jsx(
     "ul",
     {
-      className: r ? "pl-5 mt-1.5 collapsible-identifier" : "hidden collapsible-identifier pl-5 mt-1.5 show",
+      className: r ? "mt-1.5 collapsible-identifier" : "hidden collapsible-identifier mt-1.5 show",
       children: Object.entries(e).map(([a, s], i) => /* @__PURE__ */ u.jsx(
         lu,
         {
@@ -11069,7 +11069,9 @@ class Jv {
     return o;
   }
 }
-const Ec = ft({}), Se = () => mt(Ec);
+const Ec = ft(
+  {}
+), Se = () => mt(Ec);
 function sg({
   json: e,
   className: t = "",
@@ -11157,13 +11159,10 @@ function sg({
       path: P,
       renderJson: H
     }
-  ) : /* @__PURE__ */ u.jsx(
-    Zv,
-    {
-      value: R,
-      path: P
-    }
-  ), j = Object.values(p).reduce((R, P) => P !== "" ? R + 1 : R, 0);
+  ) : /* @__PURE__ */ u.jsx(Zv, { value: R, path: P }), j = Object.values(p).reduce(
+    (R, P) => P !== "" ? R + 1 : R,
+    0
+  );
   return /* @__PURE__ */ u.jsx(
     Ec.Provider,
     {
@@ -11187,28 +11186,23 @@ function sg({
         handleFieldReset: A,
         enableTypeBasedRendering: N
       },
-      children: /* @__PURE__ */ u.jsxs(
-        "div",
-        {
-          style: i,
-          className: ce("w-full h-auto b border-2 py-5", t),
-          children: [
-            H(c),
-            [Xe, tr].includes(w) && $ && j === 0 && /* @__PURE__ */ u.jsxs(
-              ye,
-              {
-                variant: (s == null ? void 0 : s.variant) || "secondary",
-                className: ce("ml-5 mt-2", s == null ? void 0 : s.className),
-                onClick: I,
-                children: [
-                  (s == null ? void 0 : s.buttonText) || "Submit",
-                  s == null ? void 0 : s.children
-                ]
-              }
-            )
-          ]
-        }
-      )
+      children: /* @__PURE__ */ u.jsxs("div", { style: i, className: ce("w-full h-auto", t), children: [
+        H(c),
+        [Xe, tr].includes(
+          w
+        ) && $ && j === 0 && /* @__PURE__ */ u.jsxs(
+          ye,
+          {
+            variant: (s == null ? void 0 : s.variant) || "secondary",
+            className: ce("ml-5 mt-2", s == null ? void 0 : s.className),
+            onClick: I,
+            children: [
+              (s == null ? void 0 : s.buttonText) || "Submit",
+              s == null ? void 0 : s.children
+            ]
+          }
+        )
+      ] })
     }
   );
 }

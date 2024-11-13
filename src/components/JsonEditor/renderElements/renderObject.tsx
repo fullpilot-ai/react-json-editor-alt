@@ -17,8 +17,8 @@ function RenderObject({
 		<ul
 			className={
 				isRootLevelKey
-					? "pl-5 mt-1.5 collapsible-identifier"
-					: `hidden collapsible-identifier pl-5 mt-1.5 show`
+					? "mt-1.5 collapsible-identifier"
+					: `hidden collapsible-identifier mt-1.5 show`
 			}
 		>
 			{Object.entries(obj).map(([key, val], index) => {
